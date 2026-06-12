@@ -1,0 +1,6 @@
+{
+  "name": "GroceryMate",
+  "short_name": "Groceries",
+  "start_url": "./",
+  "display": "standalone"
+}
