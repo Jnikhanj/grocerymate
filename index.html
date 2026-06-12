@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0f766e" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Groceries" />
+  <title>Groceries</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icon.svg" />
+  <link rel="icon" href="icon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="hero">
+      <div>
+        <p class="eyebrow" id="todayLabel">Today</p>
+        <h1>Groceries</h1>
+        <p class="subtitle" id="summaryLine">Your offline shopping list</p>
+      </div>
+      <button class="icon-button" id="installHelpBtn" type="button" aria-label="Install help">⌂</button>
+    </header>
+
+    <section class="quick-card" aria-label="Quick add grocery item">
+      <form id="addForm" autocomplete="off">
+        <label class="sr-only" for="itemName">Item name</label>
+        <div class="add-row">
+          <input id="itemName" name="itemName" type="text" placeholder="Add item, e.g. milk" maxlength="80" required />
+          <button class="primary-button" type="submit">Add</button>
+        </div>
+        <div class="compact-grid">
+          <label>
+            <span>Category</span>
+            <select id="categorySelect" name="categorySelect"></select>
+          </label>
+          <label>
+            <span>Store</span>
+            <select id="storeSelect" name="storeSelect"></select>
+          </label>
+        </div>
+        <label class="note-field">
+          <span>Note</span>
+          <input id="itemNote" name="itemNote" type="text" placeholder="Optional note" maxlength="120" />
+        </label>
+      </form>
+      <div class="quick-strip" id="quickStrip" aria-label="Quick add suggestions"></div>
+    </section>
+
+    <nav class="segmented-nav" aria-label="Main navigation">
+      <button type="button" class="nav-tab active" data-view="list">List</button>
+      <button type="button" class="nav-tab" data-view="favourites">Favourites</button>
+      <button type="button" class="nav-tab" data-view="settings">Settings</button>
+    </nav>
+
+    <main id="appContent" class="content" tabindex="-1"></main>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <div class="modal-backdrop hidden" id="itemModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <form class="modal-card" id="editForm">
+      <div class="modal-header">
+        <h2 id="modalTitle">Edit item</h2>
+        <button class="ghost-button" type="button" id="closeModalBtn">Close</button>
+      </div>
+      <input type="hidden" id="editItemId" />
+      <label>
+        <span>Item name</span>
+        <input id="editName" type="text" maxlength="80" required />
+      </label>
+      <div class="compact-grid">
+        <label>
+          <span>Category</span>
+          <select id="editCategory"></select>
+        </label>
+        <label>
+          <span>Store</span>
+          <select id="editStore"></select>
+        </label>
+      </div>
+      <label>
+        <span>Note</span>
+        <input id="editNote" type="text" maxlength="120" />
+      </label>
+      <div class="modal-actions">
+        <button class="secondary-button" type="button" id="deleteFromModalBtn">Delete</button>
+        <button class="primary-button" type="submit">Save changes</button>
+      </div>
+    </form>
+  </div>
+
+  <input id="importInput" class="hidden" type="file" accept="application/json,.json" />
+  <script src="app.js" defer></script>
+</body>
+</html>
